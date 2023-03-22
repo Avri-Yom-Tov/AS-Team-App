@@ -1,0 +1,54 @@
+{
+  "name": "npm-script",
+  "version": "1.0.0",
+  "description": "My Electron Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder",
+    "dist": "electron-builder --publish always"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dialog": "^0.3.1",
+    "electron-notification": "^1.0.0",
+    "electron-progressbar": "^2.0.1",
+    "element-plus": "^2.2.33",
+    "materialize-css": "^1.0.0",
+    "node-notifier": "^10.0.1",
+    "node-windows": "^1.0.0-beta.8",
+    "progress": "^2.0.3",
+    "sudo-prompt": "^9.2.1",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "electron": "^23.1.1",
+    "electron-builder": "^23.6.0",
+    "electron-packager": "^17.1.1"
+  },
+  "build": {
+    "productName": "My App",
+    "appId": "com.example.myapp",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "accessories/**/*",
+      "html/**/*",
+      "img/**/*",
+      "runCommand/**/*",
+      "style/**/*",
+      "utils/**/*",
+      "window/**/*",
+      "main.js",
+      "package.json",
+      "package-lock.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "publisherName": "Example.com",
+      "icon": "./img/NICE-LOGO.jpg"
+    }
+  }
+}
