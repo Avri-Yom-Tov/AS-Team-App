@@ -1,5 +1,5 @@
-const runNpmScript = (script, command = "run") => {
-  const commandString = `start cmd /k "cd /d C:\\Works\\webapp-as && npm ${command} ${script}"`;
+const runNpmScript = (script, startCommand = "npm run") => {
+  const commandString = `start cmd /k "cd /d C:\\Works\\webapp-as && ${startCommand} ${script}"`;
   const cwd = "C:\\Works\\webapp-as";
   const childProcess = require("child_process").spawn(commandString, [], {
     cwd,

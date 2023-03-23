@@ -3,12 +3,14 @@ const { dialog } = require("electron");
 async function showGenericDialog(
   title,
   message,
-  detail,
+  detail = [],
   buttons = ["Yes", "No"],
-  onConfirm = () => {},
-  onCancel = () => {},
+  onOk = () => {},
+  onList = () => {},
   defaultId = 0,
-  cancelId = 1
+  cancelId = 0,
+  checkboxLabel = "",
+  boxLabelFunk = () => {}
 ) {
   const options = {
     type: "info",
@@ -19,14 +21,18 @@ async function showGenericDialog(
     defaultId: defaultId,
     cancelId: cancelId,
   };
-
+  if (checkboxLabel) {
+    options.checkboxLabel = checkboxLabel;
+  }
   const response = await dialog.showMessageBox(options);
-  if (response.response === 1) {
-    onCancel(detail);
-    console.log("User clicked No.");
-  } else {
-    onConfirm();
-    console.log("User clicked Yes.");
+  if (response.response === 0) {
+    onOk();
+  } 
+  else {
+    if (response.checkboxChecked) {
+      boxLabelFunk();
+    }
+    onList(detail);
   }
 }
 

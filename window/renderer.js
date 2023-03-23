@@ -63,7 +63,6 @@ window.onload = function () {
       (script) => !excludedScripts.includes(script)
     );
 
-    // myFavoriteScripts.push("npx cypress open");
     for (const script of myFavoriteScripts) {
       const card = document.createElement("li");
       card.classList.add("collection-item");

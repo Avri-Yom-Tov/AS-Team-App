@@ -5,6 +5,9 @@ const mainMenuTemplate = require("./window/mainMenu");
 
 let mainWindow;
 
+
+
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 700,
@@ -16,11 +19,12 @@ function createWindow() {
       nodeIntegration: true,
       contextIsolation: false,
     },
+    resizable: false, // set resizable option to false
   });
 
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   Menu.setApplicationMenu(mainMenu);
-  mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
   mainWindow.loadFile("./html/index.html");
 
   mainWindow.on("closed", function () {
@@ -39,3 +43,5 @@ ipcMain.on("get-scripts", (event) => {
 ipcMain.on("run-script", (_, script) => {
   runNpmScript(script);
 });
+
+

@@ -1,6 +1,8 @@
 const configureHostsFile = require("../accessories/configureHostsFile");
 const { BrowserWindow } = require("electron");
-const openConfigFile = require("../accessories/openConfigFile");
+const path = require("path");
+const { dialog } = require("electron");
+const openFile = require("../accessories/openFile");
 const restartService = require("../accessories/restartService");
 const runScriptInWorksFolder = require("../runCommand/runScriptInWorksFolder");
 const runScriptInOnCmd = require("../runCommand/runScriptInOnCmd");
@@ -8,8 +10,7 @@ const showGenericDialog = require("../utils/showGenericDialog");
 const openBrowser = require("../utils/openBrowser");
 const copyToClipboard = require("../utils/copyToClipboard");
 const openAppDataPath = require("../utils/openAppDataPath");
-const readScriptsFromPackageJson = require("../utils/readScriptsFromPackageJson");
-const playRandomPlaylist = require("../accessories/playRandomPlaylist");
+const getAllCypressTestFiles = require("../accessories/getAllCypressTestFiles");
 
 const gitMenu = [
   {
@@ -35,9 +36,7 @@ const gitMenu = [
           branchName,
           ["OK", "Copy"],
           console.log,
-          copyToClipboard,
-          1,
-          0
+          copyToClipboard
         );
       } catch (error) {
         showGenericDialog(
@@ -46,9 +45,7 @@ const gitMenu = [
           error.message,
           ["OK"],
           console.error,
-          console.error,
-          0,
-          0
+          console.error
         );
       }
     },
@@ -56,12 +53,6 @@ const gitMenu = [
   {
     label: "Open Git Repository .. ( Browser ) ",
     click: () => openBrowser(),
-  },
-  {
-    label: "Open Git Fff .. ( Browser ) ",
-    click: () => {
-
-    },
   },
 ];
 
@@ -80,12 +71,100 @@ const devToolsMenu = [
   },
   { type: "separator" },
   {
-    label: "Edit Allow Origins .. ( Config file ) ",
-    click: openConfigFile,
+    label: "Edit AS Settings .. ( Config file ) ",
+    click: () => {
+      const filePath = path.join(
+        process.env.APPDATA,
+        "Nice_Systems",
+        "AutomationStudio",
+        "AutomationStudio.exe.config"
+      );
+      openFile(filePath);
+    },
   },
   {
     label: "Configure Hosts File ..  ( Drivers, etc ) ",
     click: configureHostsFile,
+  },
+];
+const test = [
+  {
+    label: "Open Cypress Interface .. ( Npx cypress open ) ",
+    click: () => runScriptInOnCmd("npx cypress open"),
+  },
+  {
+    label: "Start Specific Cypress Test .. ( Invoke Test File ) ",
+    click: () => {
+      getAllCypressTestFiles()
+        .then(async (specFiles) => {
+          const folderPath =
+            "npx cypress run --browser chrome --headed --no-exit --spec cypress/tests/integration/e2e/";
+          const options = {
+            type: "info",
+            title: "Cypress's Test !",
+            message: "Choose to Run a Specific Test .. ",
+            detail: " ( Will Run On Chrome Browser .. ) ",
+            buttons: specFiles,
+            defaultId: -555,
+            cancelId: -1,
+          };
+          const response = await dialog.showMessageBox(options);
+          console.log(response);
+          if (response.response === -1) {
+            return;
+          } else {
+            runScriptInOnCmd(folderPath + specFiles[response.response]);
+          }
+        })
+        .catch((err) => {
+          showGenericDialog(
+            "Error !",
+            "An error occurred while retrieving the branch name.",
+            err.message,
+            ["OK"],
+            console.error,
+            console.error
+          );
+        });
+    },
+  },
+  {
+    label: "Edit Cypress Test File .. ( Set Cypress File ) ",
+    click: () => {
+      getAllCypressTestFiles()
+        .then(async (specFiles) => {
+          const options = {
+            type: "info",
+            title: "Cypress's Test !",
+            message: "Choose to Edit a test file .. ",
+            detail: "( Copying common Commands at the bottom ↓ )",
+            buttons: specFiles,
+            defaultId: -555,
+            cancelId: -1,
+            checkboxLabel: 'Copy " Screenshot Configuration " To Clipboard ..',
+          };
+          const response = await dialog.showMessageBox(options);
+          console.log(response);
+          if (response.response === -1) {
+            return;
+          } else {
+            if (response.checkboxChecked) {
+              copyToClipboard("Cypress.config('numTestsKeptInMemory', 5)");
+            }
+            openFile(specFiles[response.response], true);
+          }
+        })
+        .catch((err) => {
+          showGenericDialog(
+            "Error !",
+            "An error occurred while retrieving the branch name.",
+            err.message,
+            ["OK"],
+            console.error,
+            console.error
+          );
+        });
+    },
   },
 ];
 
@@ -105,17 +184,13 @@ const appMenu = [
       aboutWindow.setMenu(null);
     },
   },
-  {
-    label: "Play .. ",
-    click: playRandomPlaylist,
-  },
 ];
 
 const menu = [
   { label: "Git", submenu: gitMenu },
+  { label: "Test", submenu: test },
   { label: "Developer Tools", submenu: devToolsMenu },
   { label: "Application", submenu: appMenu },
 ];
 
 module.exports = menu;
-
