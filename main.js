@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, Menu } = require("electron");
-const runNpmScript = require("./runCommand/runNpmScript");
+const runCommand = require("./runCommand/runCommand");
 
 const mainMenuTemplate = require("./window/mainMenu");
 
@@ -41,7 +41,7 @@ ipcMain.on("get-scripts", (event) => {
 });
 
 ipcMain.on("run-script", (_, script) => {
-  runNpmScript(script);
+  runCommand(script, "npm run");
 });
 
 

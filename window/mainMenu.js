@@ -1,11 +1,10 @@
-const configureHostsFile = require("../accessories/configureHostsFile");
 const { BrowserWindow } = require("electron");
 const path = require("path");
 const { dialog } = require("electron");
+const runCommandAsync = require("../runCommand/runCommandAsync");
 const openFile = require("../accessories/openFile");
 const restartService = require("../accessories/restartService");
-const runScriptInWorksFolder = require("../runCommand/runScriptInWorksFolder");
-const runScriptInOnCmd = require("../runCommand/runScriptInOnCmd");
+const runCommand = require("../runCommand/runCommand");
 const showGenericDialog = require("../utils/showGenericDialog");
 const openBrowser = require("../utils/openBrowser");
 const copyToClipboard = require("../utils/copyToClipboard");
@@ -15,18 +14,18 @@ const getAllCypressTestFiles = require("../accessories/getAllCypressTestFiles");
 const gitMenu = [
   {
     label: "Get Latest Changes ( Master )",
-    click: () => runScriptInOnCmd("git pull origin master"),
+    click: () => runCommand("", "git pull origin master"),
   },
   {
     label: "Get Latest Changes ( Current )",
-    click: () => runScriptInOnCmd("git pull"),
+    click: () => runCommand("", "git pull"),
   },
   { type: "separator" },
   {
     label: "What Branch am I on ? ( Git )",
     click: async () => {
       try {
-        const branchName = await runScriptInWorksFolder(
+        const branchName = await runCommandAsync(
           "git rev-parse --abbrev-ref HEAD"
         );
 
@@ -62,11 +61,12 @@ const devToolsMenu = [
     click: restartService,
   },
   {
-    label: "Run a Command on Works .. ( CMD )",
-    click: runScriptInOnCmd,
+    label: "Run A Command ..  ( C:/Works/webapp-as ) " ,
+    click: () =>
+      runCommand("cmd /k echo Type A Command and press Enter to start ..."),
   },
   {
-    label: "Open AppData Folder ..  ( Drivers, etc ) ",
+    label: "Open AppData Folder ..  ( Nice Systems ) ",
     click: openAppDataPath,
   },
   { type: "separator" },
@@ -82,15 +82,11 @@ const devToolsMenu = [
       openFile(filePath);
     },
   },
-  {
-    label: "Configure Hosts File ..  ( Drivers, etc ) ",
-    click: configureHostsFile,
-  },
 ];
 const test = [
   {
     label: "Open Cypress Interface .. ( Npx cypress open ) ",
-    click: () => runScriptInOnCmd("npx cypress open"),
+    click: () => runCommand("cypress open", "npx"),
   },
   {
     label: "Start Specific Cypress Test .. ( Invoke Test File ) ",
@@ -113,7 +109,7 @@ const test = [
           if (response.response === -1) {
             return;
           } else {
-            runScriptInOnCmd(folderPath + specFiles[response.response]);
+            runCommand(folderPath + specFiles[response.response]);
           }
         })
         .catch((err) => {
@@ -189,7 +185,7 @@ const appMenu = [
 const menu = [
   { label: "Git", submenu: gitMenu },
   { label: "Test", submenu: test },
-  { label: "Developer Tools", submenu: devToolsMenu },
+  { label: "Developer ", submenu: devToolsMenu },
   { label: "Application", submenu: appMenu },
 ];
 

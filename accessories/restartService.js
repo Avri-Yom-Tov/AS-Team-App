@@ -1,7 +1,7 @@
 const { dialog } = require("electron");
 const popUpProgressBar = require("../utils/popUpProgressBar");
 
-const runAsAdmin = require("../runCommand/runAsAdmin");
+const runCommandAdmin = require("../runCommand/runCommandAdmin");
 
 async function restartService() {
   try {
@@ -11,7 +11,7 @@ async function restartService() {
       "Confirm administrator privileges",
       true
     );
-    await runAsAdmin('sc stop "Automation Studio Launcher"');
+    await runCommandAdmin('sc stop "Automation Studio Launcher"');
     popUpProgressBar(
       4,
       "Start Automation Studio !",
@@ -19,7 +19,7 @@ async function restartService() {
       true
     );
     setTimeout(async () => {
-      await runAsAdmin('sc start "Automation Studio Launcher"');
+      await runCommandAdmin('sc start "Automation Studio Launcher"');
 
       dialog.showMessageBox({
         type: "info",

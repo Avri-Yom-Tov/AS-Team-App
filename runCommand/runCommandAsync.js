@@ -1,10 +1,10 @@
 const { exec } = require("child_process");
 
-const runScriptInWorksFolder = (script) => {
-  const cwd = "C:\\Works\\webapp-as";
+const runCommandAsync = (script, location = "C:\\Works\\webapp-as") => {
+  console.log(script, location);
 
   return new Promise((resolve, reject) => {
-    exec(script, { cwd }, (error, stdout, stderr) => {
+    exec(script, { location }, (error, stdout, stderr) => {
       if (error) {
         reject(error);
       } else if (stderr) {
@@ -16,4 +16,4 @@ const runScriptInWorksFolder = (script) => {
   });
 };
 
-module.exports = runScriptInWorksFolder;
+module.exports = runCommandAsync;

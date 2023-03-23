@@ -1,7 +1,7 @@
 const sudo = require("sudo-prompt");
 
 
-function runAsAdmin(cmd) {
+function runCommandAdmin(cmd) {
   return new Promise((resolve, reject) => {
     const options = {
       name: "Electron App",
@@ -17,4 +17,4 @@ function runAsAdmin(cmd) {
 }
 
 
-module.exports = runAsAdmin
+module.exports = runCommandAdmin
