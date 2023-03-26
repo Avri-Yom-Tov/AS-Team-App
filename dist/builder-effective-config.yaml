@@ -1,0 +1,23 @@
+directories:
+  output: dist
+  buildResources: build
+productName: AS-Team-App
+appId: com.example.AS-Team-App
+files:
+  - filter:
+      - accessories/**/*
+      - menus/**/*
+      - html/**/*
+      - img/**/*
+      - runCommand/**/*
+      - style/**/*
+      - utils/**/*
+      - window/**/*
+      - main.js
+      - package.json
+      - package-lock.json
+win:
+  target: nsis
+  publisherName: AS-Team-App.com
+  icon: ./img/NICE-LOGO.jpg
+electronVersion: 23.2.0

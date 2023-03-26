@@ -1,7 +1,7 @@
 const { shell } = require("electron");
 
 function openBrowser(
-  repositoryUrl = "https://github.com/nice-cxone/webapp-as"
+  repositoryUrl = ""
 ) {
   shell.openExternal(repositoryUrl);
 }
