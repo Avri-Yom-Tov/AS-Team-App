@@ -38,5 +38,5 @@ ipcMain.on("get-scripts", (event) => {
 });
 
 ipcMain.on("run-script", (_, script) => {
-  runCommand(script, "npm run");
+  runCommand(script, "npm run ");
 });

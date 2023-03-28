@@ -27,10 +27,9 @@ const createTestMenu = () => {
               buttons: specFiles,
               defaultId: -555,
               cancelId: -1,
-              noLink: true, // ??
+              noLink: true,
             };
             const response = await dialog.showMessageBox(options);
-            console.log(response);
             if (response.response === -1) {
               return;
             } else {
@@ -67,7 +66,6 @@ const createTestMenu = () => {
               noLink: true,
             };
             const response = await dialog.showMessageBox(options);
-            console.log(response);
             if (response.response === -1) {
               return;
             } else {
