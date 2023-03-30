@@ -1,8 +1,8 @@
 const fs = require('fs');
 
 
-function getAllCypressTestFiles() {
-  const folderPath = "C:/Works/webapp-as/cypress/tests/integration/e2e";
+function getAllCypressTestFiles(folderPath) {
+ 
 
   return new Promise((resolve, reject) => {
     fs.readdir(folderPath, (err, specFiles) => {
