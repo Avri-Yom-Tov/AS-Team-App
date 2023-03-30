@@ -7,3 +7,4 @@ function copyToClipboard(text, type = "selection") {
 }
 
 module.exports = copyToClipboard;
+

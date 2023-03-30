@@ -1,6 +1,6 @@
 {
-  "name": "npm-script",
-  "version": "1.0.0",
+  "name": "as-team-app",
+  "version": "1.6.0",
   "description": "A powerful and user-friendly Electron application for managing your tasks efficiently.",
   "main": "main.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "pack": "electron-builder",
     "dist": "electron-builder --publish always"
   },
-  "author": "",
+  "author": "Avri",
   "license": "ISC",
   "dependencies": {
     "dialog": "^0.3.1",
@@ -42,7 +42,7 @@
     "win": {
       "target": "nsis",
       "publisherName": "AS-Team-App.com",
-      "icon": "./img/NICE-LOGO.jpg"
+      "icon": "./img/logo500px.png"
     }
   }
 }

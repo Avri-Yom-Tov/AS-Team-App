@@ -72,7 +72,10 @@ const createTestMenu = () => {
               if (response.checkboxChecked) {
                 copyToClipboard("Cypress.config('numTestsKeptInMemory', 5)");
               }
-              popUpProgressBar(4);
+              popUpProgressBar(
+                3,
+                "Opening File " + specFiles[response.response] + " .."
+              );
               openFile(specFiles[response.response], true);
             }
           })

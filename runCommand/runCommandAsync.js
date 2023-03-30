@@ -1,7 +1,6 @@
 const { exec } = require("child_process");
 
 const runCommandAsync = (script, location = "C:\\Works\\webapp-as") => {
-  console.log(script, location);
 
   return new Promise((resolve, reject) => {
     exec(script, { location }, (error, stdout, stderr) => {

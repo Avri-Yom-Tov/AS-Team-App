@@ -11,31 +11,7 @@ window.onload = function () {
   ipcRenderer.send("get-scripts");
 
   ipcRenderer.on("scripts", () => {
-    // const myFavoriteScripts = [
-    //   "build",
-    //   "builddev",
-    //   "dev",
-    //   "dev-serve",
-    //   "test",
-    //   "jest",
-    //   "cy",
-    //   "cy:sanity",
-    //   "cy:e2e1",
-    //   "cy:e2e2",
-    //   "cy:e2e3",
-    //   "cy:e2e4",
-    //   "cy:e2e5",
-    //   "cy:e2e6",
-    //   "cy:e2e7",
-    //   "cy:e2e",
-    //   "cy:nightly",
-    //   "cy:dev",
-    //   "cy:component",
-    //   "cy:integration",
-    //   "cy:sanity",
-    //   "cypress:dev",
 
-    // ];
     const excludedScripts = [
       "webdriver",
       "modules",
