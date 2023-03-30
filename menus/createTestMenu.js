@@ -5,7 +5,6 @@ const showGenericDialog = require("../utils/showGenericDialog");
 const copyToClipboard = require("../utils/copyToClipboard");
 const getAllCypressTestFiles = require("../accessories/getAllCypressTestFiles");
 const popUpProgressBar = require("../utils/popUpProgressBar");
-const CYPRESS_TEST_FOLDER = "C:/Works/webapp-as/cypress/tests/integration";
 const createTestMenu = () => {
   return [
     {
