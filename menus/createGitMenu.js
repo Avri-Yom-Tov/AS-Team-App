@@ -1,24 +1,24 @@
-const runCommand = require("../runCommand/runCommand");
+const runShellCommand = require("../runCommand/runShellCommand");
 const runCommandAsync = require("../runCommand/runCommandAsync");
 const openBrowser = require("../utils/openBrowser");
 const showGenericDialog = require("../utils/showGenericDialog");
 const copyToClipboard = require("../utils/copyToClipboard");
 
-
 const createGitMenu = () => {
   return [
     {
       label: "Get Latest Changes ( Master )",
-      click: () => runCommand("", "git pull origin master"),
+      click: () => runShellCommand("git pull origin master"),
     },
     {
       label: "Get Latest Changes ( Current )",
-      click: () => runCommand("", "git pull"),
+      click: () => runShellCommand("git pull"),
     },
     { type: "separator" },
     {
       label: "What Branch am I on ? ( Git )",
       click: async () => {
+        // runShellCommand("git rev-parse --abbrev-ref HEAD")
         try {
           const branchName = await runCommandAsync(
             "git rev-parse --abbrev-ref HEAD"

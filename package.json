@@ -42,7 +42,7 @@
     "win": {
       "target": "nsis",
       "publisherName": "AS-Team-App.com",
-      "icon": "./img/logo500px.png"
+      "icon": "./img/AppLogo.png"
     }
   }
 }

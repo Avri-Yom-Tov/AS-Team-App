@@ -1,36 +1,45 @@
 const path = require("path");
 const openFile = require("../accessories/openFile");
 const restartService = require("../accessories/restartService");
-const runCommand = require("../runCommand/runCommand");
+const runShellCommand = require("../runCommand/runShellCommand");
 const openAppDataPath = require("../utils/openAppDataPath");
+const popUpProgressBar = require("../utils/popUpProgressBar");
 
 const createDevToolsMenu = () => {
   return [
     {
-      label: "Restart AS Application .. ( Services )",
-      click: restartService,
+      label: "Restart Application Service .. ( AS Launcher )",
+      click: () => {
+        restartService("Automation Studio Launcher");
+      },
     },
     {
-      label: "Run A Command ..  ( C:/Works/webapp-as ) ",
+      label: "Run Command in Terminal ..  ( Works/webapp-as ) ",
       click: () =>
-        runCommand("cmd /k echo Type A Command and press Enter to start ..."),
+        runShellCommand(
+          "cmd /k echo Type A Command and press Enter to start ..."
+        ),
     },
     {
       label: "Open AppData Folder ..  ( Nice Systems ) ",
       click: openAppDataPath,
     },
-    { type: "separator" },
     {
-      label: "Edit AS Settings .. ( Config file ) ",
+      label: "Edit Automation Studio Settings .. ( Config file ) ",
       click: () => {
         const filePath = path.join(
           process.env.APPDATA,
           "Nice_Systems",
           "AutomationStudio",
-          "AutomationStudio.exe.config"
+          "/"
         );
-        openFile(filePath);
+        popUpProgressBar(2, "Opening File " + "AutomationStudio.exe.config ..");
+        openFile("AutomationStudio.exe.config", filePath);
       },
+    },
+    {
+      label: "Open Programs and Software ..  ( Control Panel )",
+      click: () => runShellCommand("control.exe appwiz.cpl", true),
     },
   ];
 };

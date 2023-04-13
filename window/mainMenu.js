@@ -7,7 +7,7 @@ const createAppMenu = require("../menus/createAppMenu");
 const menu = [
   { label: "Git", submenu: createGitMenu() },
   { label: "Test", submenu: createTestMenu() },
-  { label: "Developer ", submenu: createDevToolsMenu() },
+  { label: "Developer", submenu: createDevToolsMenu() },
   { label: "Application", submenu: createAppMenu() },
 ];
 

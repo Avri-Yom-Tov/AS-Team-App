@@ -1,30 +1,30 @@
 const { dialog } = require("electron");
 const popUpProgressBar = require("../utils/popUpProgressBar");
-
 const runCommandAdmin = require("../runCommand/runCommandAdmin");
 
-async function restartService() {
+
+
+const restartService = async (serviceName) => {
   try {
     popUpProgressBar(
       2,
-      "Stop Automation Studio !",
+      `Stop ${serviceName}!`,
       "Confirm administrator privileges",
       true
     );
-    await runCommandAdmin('sc stop "Automation Studio Launcher"');
+    await runCommandAdmin(`sc stop "${serviceName}"`);
     popUpProgressBar(
       4,
-      "Start Automation Studio !",
+      `Start ${serviceName}!`,
       "Confirm administrator privileges",
       true
     );
     setTimeout(async () => {
-      await runCommandAdmin('sc start "Automation Studio Launcher"');
+      await runCommandAdmin(`sc start "${serviceName}"`);
 
       dialog.showMessageBox({
         type: "info",
-        message:
-          "Automation Studio Launcher Service has been Successfully restarted ! ",
+        message: `${serviceName} Service has been Successfully Restarted!`,
         buttons: ["OK"],
         defaultId: 0,
       });
@@ -32,9 +32,9 @@ async function restartService() {
   } catch (error) {
     dialog.showErrorBox(
       "Error",
-      `Failed to restart Automation Studio Launcher Service: ${error.message}`
+      `Failed to Restart ${serviceName} Service:  -- ${error.message}`
     );
   }
-}
+};
 
 module.exports = restartService;
