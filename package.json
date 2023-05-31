@@ -35,7 +35,6 @@
     },
     "files": [
       "accessories/**/*",
-      "menus/**/*",
       "html/**/*",
       "img/**/*",
       "runCommand/**/*",

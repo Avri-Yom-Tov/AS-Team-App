@@ -11,6 +11,7 @@ const openBrowser = require("./utils/openBrowser");
 const showGenericDialog = require("./utils/showGenericDialog");
 const getAllCypressTestFiles = require("./accessories/getAllCypressTestFiles");
 const npxCypressRun = "npx cypress run --browser chrome --headed --no-exit --spec cypress/tests/integration/e2e/";
+
 let mainWindow;
 
 function createWindow() {
@@ -72,19 +73,6 @@ function createWindow() {
         {
           label: "Open Git Repository .. ( Browser ) ",
           click: () => openBrowser("https://github.com/nice-cxone/webapp-as"),
-        },
-        {
-          label: "Open Git Repository .. ( Browser ) ",
-          click: () => {
-            // let swalOptions1 = {
-            //   position: "top-end",
-            //   title: "Signed in successfully",
-            //   icon: "success",
-            //   showConfirmButton: true,
-            //   timer: 3000,
-            // };
-            // Alert.fireToast(swalOptions1);
-          },
         },
       ],
     },
@@ -295,7 +283,7 @@ function createWindow() {
       label: "Developer",
       submenu: [
         {
-          label: "Restart Application Service .. ( AS Launcher )",
+          label: "Restart Automation Studio Service .. ( AS Launcher )",
           click: () => {
             restartService("Automation Studio Launcher");
           },
@@ -332,7 +320,6 @@ function createWindow() {
           label: "Update Min Version .. ( configurations ) ",
           click: () => {
             mainWindow.loadFile("./html/updateMinVersion.html");
-            // mainWindow.webContents.openDevTools();
           },
         },
         {
@@ -347,21 +334,11 @@ function createWindow() {
         {
           label: "About ..",
           click: () => {
-            const aboutWindow = new BrowserWindow({
-              width: 500,
-              height: 250,
-              modal: true,
-              title: "About This App ..",
-              webPreferences: {
-                nodeIntegration: true,
-              },
-            });
-            aboutWindow.loadFile("./html/aboutThisApp.html");
-            aboutWindow.setMenu(null);
+            mainWindow.loadFile("./html/aboutThisApp.html");
           },
         },
         {
-          label: "Refresh",
+          label: "Refresh ..",
           click: () => {
             mainWindow.reload();
           },
@@ -394,7 +371,6 @@ ipcMain.on('navigate-to-main', () => {
 });
 
 
-// module.exports = mainWindow;
 
 
 
@@ -412,8 +388,3 @@ ipcMain.on('navigate-to-main', () => {
 
 
 
-// ipcMain.on("run-script", (_, script) => {
-//   runShellCommand("npm run " + script);
-// });
-
-// ??
