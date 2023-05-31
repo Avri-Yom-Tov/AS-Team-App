@@ -1,6 +1,7 @@
 const fs = require("fs");
 
-function readScriptsFromPackageJson(path) {
+function readScriptsFromPackageJson() {
+  const path = "C:\\Works\\webapp-as";
   const myScripts = [];
 
   try {

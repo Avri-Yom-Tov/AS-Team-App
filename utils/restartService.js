@@ -1,5 +1,5 @@
 const { dialog } = require("electron");
-const popUpProgressBar = require("../utils/popUpProgressBar");
+const popUpProgressBar = require("./popUpProgressBar");
 const runCommandAdmin = require("../runCommand/runCommandAdmin");
 
 

@@ -85,3 +85,32 @@ li {
   height: 2vw;
   min-width: unset;
 }
+
+/* Style for the buttons */
+.customSwalBtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Style for the dialog box */
+.swal2-popup {
+  font-size: 16px !important;
+}
+
+.swal2-title {
+  font-weight: 600;
+}
+
+.swal2-icon {
+  font-size: 40px;
+}
+
+.swal2-html-container {
+  margin-top: 16px;
+}
+

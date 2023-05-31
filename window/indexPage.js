@@ -1,12 +1,13 @@
-const { ipcRenderer } = require("electron");
 
-const readScriptsFromPackageJson = require("../utils/readScriptsFromPackageJson");
+
+const readScriptsFromPackageJson = require("../accessories/readScriptsFromPackageJson");
+const runShellCommand = require("../runCommand/runShellCommand");
+
 
 window.onload = function () {
-  const path = "C:\\Works\\webapp-as";
+
   const scriptsList = document.getElementById("scripts");
-  
-  const ScriptsJson = readScriptsFromPackageJson(path);
+  const ScriptsJson = readScriptsFromPackageJson();
 
   const excludedScripts = [
     "webdriver",
@@ -29,6 +30,7 @@ window.onload = function () {
     "cypress:pipeline-test",
     "cypress:pipeline-staging",
     "cypress:integration",
+    "cypress:dev"
   ];
 
   const myFavoriteScripts = ScriptsJson.filter(
@@ -51,9 +53,39 @@ window.onload = function () {
     card.appendChild(body);
 
     card.onclick = function () {
-      ipcRenderer.send("run-script", script);
+      runShellCommand("npm run " + script);
     };
 
     scriptsList.appendChild(card);
   }
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const { ipcRenderer } = require("electron");
+// ipcRenderer.send("run-script", script);

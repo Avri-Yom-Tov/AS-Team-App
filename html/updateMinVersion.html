@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Automation Studio</title>
+  </head>
+  <style>
+    #updateButton {
+      padding: 11px 180px;
+      background-color: chocolate;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+    }
+    h1 {
+      font-family: cursive;
+    }
+    .back-button {
+      position: absolute;
+      left: 10px;
+      top: 28px;
+      padding: 8px 10px;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: left;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .back-button span {
+      margin-right: 5px;
+    }
+    #loader {
+      border: 10px solid #f3f3f3;
+      border-top: 16px solid #0070c0;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      animation: spin 2s linear infinite;
+      margin: 0 auto;
+      margin-top: 15px;
+    }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <body>
+    <div style="margin-top: 35px" id="loader"></div>
+    <div id="content" style="display: none">
+      <button id="backButton" class="back-button">
+        <span>&larr;</span>
+      </button>
+      <h1>MinVersion Editor</h1>
+      <div id="output"></div>
+      <br />
+      <button id="updateButton">Update</button>
+    </div>
+  </body>
+  <script>
+    setTimeout(function () {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }, 1200);
+  </script>
+  <script defer src="../window/updateMinVersion.js"></script>
+</html>

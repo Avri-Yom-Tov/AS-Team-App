@@ -1,5 +1,5 @@
 {
-  "name": "as-team-app",
+  "name": "automation-studio",
   "version": "1.6.0",
   "description": "A powerful and user-friendly Electron application for managing your tasks efficiently.",
   "main": "main.js",
@@ -11,9 +11,16 @@
   "author": "Avri",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.2.3",
+    "bootstrap-dialog": "^1.34.6",
     "dialog": "^0.3.1",
+    "electron-alert": "^0.1.20",
+    "electron-modal": "^1.0.0",
     "electron-progressbar": "^2.0.1",
-    "sudo-prompt": "^9.2.1"
+    "jquery": "^3.6.4",
+    "sudo-prompt": "^9.2.1",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.7.8"
   },
   "devDependencies": {
     "electron": "^23.1.1",
@@ -40,6 +47,7 @@
       "package-lock.json"
     ],
     "win": {
+      "appId": "Automation Studio App",
       "target": "nsis",
       "publisherName": "AS-Team-App.com",
       "icon": "./img/AppLogo.png"
