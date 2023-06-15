@@ -1,49 +1,42 @@
 
 
-const readScriptsFromPackageJson = require("../accessories/readScriptsFromPackageJson");
-const runShellCommand = require("../runCommand/runShellCommand");
 
+const runShellCommand = require("../runCommand/runShellCommand");
 
 window.onload = function () {
 
   const scriptsList = document.getElementById("scripts");
-  const ScriptsJson = readScriptsFromPackageJson();
 
-  const excludedScripts = [
-    "webdriver",
-    "modules",
-    "modulesDev",
-    "build-local-distribution",
-    "d",
-    "pretest",
-    "test:clean",
-    "test:watch",
-    "watch",
-    "format",
-    "storybook",
-    "build-storybook",
-    "cy:pipeline-dev",
-    "cy:pipeline-test",
-    "cy:pipeline-staging",
-    "cy:syn_monitor",
-    "cypress:pipeline-dev",
-    "cypress:pipeline-test",
-    "cypress:pipeline-staging",
-    "cypress:integration",
-    "cypress:dev"
-  ];
 
-  const myFavoriteScripts = ScriptsJson.filter(
-    (script) => !excludedScripts.includes(script)
-  );
-
-  for (const script of myFavoriteScripts) {
+  [
+    "build",
+    "builddev",
+    "dev",
+    "dev-serve",
+    "test",
+    "jest",
+    "cy",
+    "cy:dev",
+    "cy:component",
+    "cy:integration",
+    "cy:sanity",
+    "cy:qualityGate",
+    "cy:e2e1",
+    "cy:e2e2",
+    "cy:e2e3",
+    "cy:e2e4",
+    "cy:e2e5",
+    "cy:e2e6",
+    "cy:e2e7",
+    "cy:e2e",
+    "cy:nightly"
+  ].forEach(element => {
     const card = document.createElement("li");
     card.classList.add("collection-item");
 
     const title = document.createElement("h4");
     title.innerHTML =
-      script.charAt(0).toUpperCase() + script.slice(1).toLowerCase();
+      element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
 
     title.classList.add("card-title");
 
@@ -53,11 +46,11 @@ window.onload = function () {
     card.appendChild(body);
 
     card.onclick = function () {
-      runShellCommand("npm run " + script);
+      runShellCommand("npm run " + element);
     };
 
     scriptsList.appendChild(card);
-  }
+  });
 
 };
 

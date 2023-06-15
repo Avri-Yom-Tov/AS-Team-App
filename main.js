@@ -44,7 +44,6 @@ function createWindow() {
         {
           label: "What Branch am I on ? ( Git )",
           click: async () => {
-            // runShellCommand("git rev-parse --abbrev-ref HEAD")
             try {
               const branchName = await runCommandAsync(
                 "git rev-parse --abbrev-ref HEAD"
